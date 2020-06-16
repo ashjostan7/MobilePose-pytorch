@@ -54,13 +54,13 @@ if __name__ == '__main__':
     # minloss = 0.43162785
 
     # gpu setting
-    os.environ["CUDA_VISIBLE_DEVICES"]=args.gpu
-    torch.backends.cudnn.enabled = True
-    cudnn.benchmark = True
+    #os.environ["CUDA_VISIBLE_DEVICES"]=args.gpu
+    #torch.backends.cudnn.enabled = False
+    #cudnn.benchmark = False
 
-    print("GPU NUM: %d"%(torch.cuda.device_count()))
-    net = CoordRegressionNetwork(n_locations=16, backbone=modeltype).to(device)
-    net = torch.nn.DataParallel(net).to(device)
+    #print("GPU NUM: %d"%(torch.cuda.device_count()))
+    net = CoordRegressionNetwork(n_locations=6, backbone=modeltype).to(device)#Changed n_locations from 16 to 6
+    #net = torch.nn.DataParallel(net).to(device)
 
     learning_rate = args.lr
     batchsize = args.batchsize
@@ -165,8 +165,8 @@ if __name__ == '__main__':
                 minloss = np.mean(np.array(valid_loss_epoch))
                 checkpoint_file = "%s/%s_%.4f.t7"%(PATH_PREFIX, modelname, minloss)
                 checkpoint_best_file = "%s/%s_adam_best.t7"%(PATH_PREFIX, modelname)
-                # torch.save(net, checkpoint_file)
-                torch.save(net.module.state_dict(), checkpoint_best_file)
+                torch.save(net, checkpoint_file)
+                torch.save(net.state_dict(), checkpoint_best_file)
                 print('==> checkpoint model saving to %s and %s'%(checkpoint_file, checkpoint_best_file))
 
             print('[epoch %d] train loss(coords): %.8f, train loss(hm): %.8f, train loss: %.8f,\n          valid loss(coords): %.8f, valid loss(hm): %.8f, valid loss: %.8f\n' %

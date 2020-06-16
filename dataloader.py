@@ -44,9 +44,9 @@ def display_pose( img, pose, ids):
     std=np.array([0.229, 0.224, 0.225])
     pose  = pose.data.cpu().numpy()
     img = img.cpu().numpy().transpose(1,2,0)
-    colors = ['g', 'g', 'g', 'g', 'g', 'g', 'm', 'm', 'r', 'r', 'y', 'y', 'y', 'y','y','y']
-    pairs = [[8,9],[11,12],[11,10],[2,1],[1,0],[13,14],[14,15],[3,4],[4,5],[8,7],[7,6],[6,2],[6,3],[8,12],[8,13]]
-    colors_skeleton = ['r', 'y', 'y', 'g', 'g', 'y', 'y', 'g', 'g', 'm', 'm', 'g', 'g', 'y','y']
+    colors = ['g', 'g', 'g', 'g']
+    pairs = [[0,1],[1,2],[3,4],[4,5]]
+    colors_skeleton = ['r', 'y', 'y', 'g']
     img = np.clip(img*std+mean, 0.0, 1.0)
     img_width, img_height,_ = img.shape
     pose = ((pose + 1)* np.array([img_width, img_height])-1)/2 # pose ~ [-1,1]

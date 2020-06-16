@@ -32,8 +32,8 @@ from dataset_factory import DatasetFactory
 
 gpus = [0,1]
 os.environ["CUDA_VISIBLE_DEVICES"]="0"
-torch.backends.cudnn.enabled = True
-print("GPU NUM: ", torch.cuda.device_count())
+#torch.backends.cudnn.enabled = True
+#print("GPU NUM: ", torch.cuda.device_count())
 
 def eval_coco(all_test_data, modelname, net_path, result_gt_json_path, result_pred_json_path):
         """
@@ -42,13 +42,13 @@ def eval_coco(all_test_data, modelname, net_path, result_gt_json_path, result_pr
         'result-gt-json.txt', 'result-pred-json.txt')
         """
         # gpu mode
-        net = CoordRegressionNetwork(n_locations=16, backbone=modelname).to(device)
-        net.load_state_dict(torch.load(net_path))
-        net = net.eval()
+        #net = CoordRegressionNetwork(n_locations=6, backbone=modelname).to(device)
+        #net.load_state_dict(torch.load(net_path))
+        #net = net.eval()
 
-        # cpu mode
-        # net = Net()
-        # net = torch.load(net_path, map_location=lambda storage, loc: storage)
+        cpu mode
+        net = Net()
+        net = torch.load(net_path, map_location=lambda storage, loc: storage)
 
         ## generate groundtruth json
         total_size = len(all_test_data['image'])

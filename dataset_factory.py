@@ -15,7 +15,7 @@ from dataloader import Rescale, Wrap, PoseDataset, ToTensor, Augmentation, Expan
 from torchvision import datasets, transforms, utils, models
 import os
 
-ROOT_DIR = "./pose_dataset/mpii"  # root dir to the dataset
+ROOT_DIR = "./dataset/"  # root dir to the dataset
 
 DEBUG_MODE = False
 
